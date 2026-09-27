@@ -1,5 +1,7 @@
 from Algorithms import fundamental 
 from Algorithms import factoring
+from Algorithms import arrays
+from Algorithms import collections
 
 
 def show_menu():
@@ -182,6 +184,104 @@ def factoring_menu():
             print("Invalid choice. Please enter a number from 1 to 9.")
 
 
+def arrays_menu():
+    while True:
+        print("\n========================================")
+        print("             ARRAY ALGORITHMS")
+        print("========================================")
+        print("1. Reverse an Array")
+        print("2. Count an Element")
+        print("3. Find Maximum")
+        print("4. Remove Duplicates")
+        print("5. Partition an Array")
+        print("6. Find Kth Smallest Element")
+        print("7. Back to Algorithm Solver")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            print("Reversed array:", arrays.reverse_array(numbers))
+
+        elif choice == "2":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            target = int(input("Enter element to count: "))
+            print("Count:", arrays.count_element(numbers, target))
+
+        elif choice == "3":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            result = arrays.find_maximum(numbers)
+
+            if result is None:
+                print("Array cannot be empty.")
+            else:
+                print("Maximum:", result)
+
+        elif choice == "4":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            print("Array without duplicates:", arrays.remove_duplicates(numbers))
+
+        elif choice == "5":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            pivot = int(input("Enter pivot value: "))
+            print("Partitioned array:", arrays.partition_array(numbers, pivot))
+
+        elif choice == "6":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            k = int(input("Enter k: "))
+            result = arrays.kth_smallest(numbers, k)
+
+            if result is None:
+                print("Invalid value of k.")
+            else:
+                print(f"{k}th smallest element:", result)
+
+        elif choice == "7":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 7.")
+
+
+def collections_menu():
+    while True:
+        print("\n========================================")
+        print("           PYTHON COLLECTIONS")
+        print("========================================")
+        print("1. List Operations")
+        print("2. Tuple Operations")
+        print("3. Set Operations")
+        print("4. Dictionary Operations")
+        print("5. Back to Algorithm Solver")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            print("List information:", collections.list_operations(numbers))
+
+        elif choice == "2":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            print("Tuple information:", collections.tuple_operations(numbers))
+
+        elif choice == "3":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            print("Set information:", collections.set_operations(numbers))
+
+        elif choice == "4":
+            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            print("Dictionary frequency:", collections.dictionary_operations(numbers))
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 5.")
+
+
+
 def algorithm_solver_menu():
     while True:
         print("\n========================================")
@@ -189,7 +289,8 @@ def algorithm_solver_menu():
         print("========================================")
         print("1. Fundamental Algorithms")
         print("2. Factoring Algorithms")
-        print("3. Back to Main Menu")
+        print("3. Array Algorithms")
+        print("4. Python Collections")
         print("========================================")
 
         choice = input("Enter your choice: ")
@@ -201,8 +302,14 @@ def algorithm_solver_menu():
             factoring_menu()
 
         elif choice == "3":
-            break
+            arrays_menu()
 
+        elif choice == "4":
+            collections_menu()
+
+        elif choice == "5": 
+            break
+        
         else:
             print("Invalid choice. Please enter a number from 1 to 3.")
             
