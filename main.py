@@ -3,7 +3,7 @@ from Algorithms import factoring
 from Algorithms import arrays
 from Algorithms import collections
 from Algorithms import conversions
-
+from Learning import explanations
 
 def show_menu():
     print("\n============================================")
@@ -363,7 +363,36 @@ def algorithm_solver_menu():
         
         else:
             print("Invalid choice. Please enter a number from 1 to 3.")
-            
+
+
+def learning_menu():
+    while True:
+        print("\n========================================")
+        print("             LEARNING MODULE")
+        print("========================================")
+        print("1. Learn Factorial")
+        print("2. Learn Fibonacci")
+        print("3. Learn GCD")
+        print("4. Back to Main Menu")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            explanations.show_factorial()
+
+        elif choice == "2":
+            explanations.show_fibonacci()
+
+        elif choice == "3":
+            explanations.show_gcd()
+
+        elif choice == "4":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 4.")
+
 
 def main():
     while True:
@@ -375,8 +404,7 @@ def main():
             algorithm_solver_menu()
             
         elif choice == "2":
-            print("\n[Learning Module]")
-            print("This module will be added soon.")
+            learning_menu()
 
         elif choice == "3":
             print("\n[Practice Mode]")
