@@ -4,6 +4,8 @@ from Algorithms import arrays
 from Algorithms import collections
 from Algorithms import conversions
 from Learning import explanations
+from Practice import questions
+
 
 def show_menu():
     print("\n============================================")
@@ -394,6 +396,48 @@ def learning_menu():
             print("Invalid choice. Please enter a number from 1 to 4.")
 
 
+def practice_menu():
+    score = 0
+    total_questions = 0
+
+    while True:
+        print("\n========================================")
+        print("             PRACTICE MODE")
+        print("========================================")
+        print("1. Start Practice")
+        print("2. View Score")
+        print("3. Back to Main Menu")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            question, answer = questions.generate_question()
+
+            print("\nQuestion:")
+            print(question)
+
+            user_answer = int(input("Your answer: "))
+
+            total_questions += 1
+
+            if user_answer == answer:
+                print("Correct!")
+                score += 1
+            else:
+                print("Incorrect.")
+                print("Correct answer:", answer)
+
+        elif choice == "2":
+            print("\nScore:", score, "/", total_questions)
+
+        elif choice == "3":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 3.")
+
+
 def main():
     while True:
         show_menu()
@@ -407,8 +451,7 @@ def main():
             learning_menu()
 
         elif choice == "3":
-            print("\n[Practice Mode]")
-            print("This module will be added soon.")
+            practice_menu()
 
         elif choice == "4":
             print("\n[Performance Analysis]")
