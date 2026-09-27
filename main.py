@@ -1,11 +1,12 @@
-from Algorithms import fundamental 
+from Algorithms import fundamental
 from Algorithms import factoring
 from Algorithms import arrays
 from Algorithms import collections
 from Algorithms import conversions
 from Learning import explanations
 from Practice import questions
-
+from Utilities import validation
+from Utilities import performance
 
 def show_menu():
     print("\n============================================")
@@ -40,38 +41,40 @@ def fundamental_menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            a = int(input("Enter first value: "))
-            b = int(input("Enter second value: "))
+            a = validation.get_integer("Enter first value: ")
+            b = validation.get_integer("Enter second value: ")
 
             result = fundamental.exchange_values(a, b)
             print("After exchange:", result)
 
         elif choice == "2":
-            n = int(input("Enter a number: "))
+            n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.count_numbers(n)
             print("Count:", result)
 
         elif choice == "3":
-            n = int(input("Enter a number: "))
+            n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.summation(n)
             print("Sum:", result)
 
         elif choice == "4":
-            n = int(input("Enter a number: "))
+            n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.factorial(n)
             print("Factorial:", result)
 
         elif choice == "5":
-            n = int(input("How many Fibonacci numbers? "))
+            n = validation.get_non_negative_integer(
+                "How many Fibonacci numbers? "
+            )
 
             result = fundamental.fibonacci_sequence(n)
             print("Fibonacci sequence:", result)
 
         elif choice == "6":
-            n = int(input("Enter a number: "))
+            n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.reverse_number(n)
             print("Reversed number:", result)
@@ -108,7 +111,7 @@ def factoring_menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            n = float(input("Enter a number: "))
+            n = validation.get_float("Enter a number: ")
 
             result = factoring.square_root(n)
 
@@ -118,7 +121,7 @@ def factoring_menu():
                 print("Square root:", result)
 
         elif choice == "2":
-            n = int(input("Enter an integer: "))
+            n = validation.get_integer("Enter an integer: ")
 
             result = factoring.smallest_divisor(n)
 
@@ -128,20 +131,22 @@ def factoring_menu():
                 print("Smallest divisor:", result)
 
         elif choice == "3":
-            a = int(input("Enter first number: "))
-            b = int(input("Enter second number: "))
+            a = validation.get_integer("Enter first number: ")
+            b = validation.get_integer("Enter second number: ")
 
             result = factoring.gcd(a, b)
             print("GCD:", result)
 
         elif choice == "4":
-            n = int(input("Generate primes up to: "))
+            n = validation.get_non_negative_integer(
+                "Generate primes up to: "
+            )
 
             result = factoring.generate_primes(n)
             print("Prime numbers:", result)
 
         elif choice == "5":
-            n = int(input("Enter a number: "))
+            n = validation.get_positive_integer("Enter a number: ")
 
             result = factoring.prime_factors(n)
 
@@ -151,8 +156,8 @@ def factoring_menu():
                 print("Please enter an integer greater than 1.")
 
         elif choice == "6":
-            start = int(input("Enter starting value: "))
-            end = int(input("Enter ending value: "))
+            start = validation.get_integer("Enter starting value: ")
+            end = validation.get_integer("Enter ending value: ")
 
             if start > end:
                 print("Starting value must not be greater than ending value.")
@@ -161,17 +166,16 @@ def factoring_menu():
                 print("Pseudo-random number:", result)
 
         elif choice == "7":
-            base = int(input("Enter base: "))
-            exponent = int(input("Enter exponent: "))
+            base = validation.get_integer("Enter base: ")
+            exponent = validation.get_non_negative_integer(
+                "Enter exponent: "
+            )
 
-            if exponent < 0:
-                print("Please enter a non-negative exponent.")
-            else:
-                result = factoring.large_power(base, exponent)
-                print("Result:", result)
+            result = factoring.large_power(base, exponent)
+            print("Result:", result)
 
         elif choice == "8":
-            n = int(input("Enter n: "))
+            n = validation.get_non_negative_integer("Enter n: ")
 
             result = factoring.nth_fibonacci(n)
 
@@ -204,16 +208,26 @@ def arrays_menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
             print("Reversed array:", arrays.reverse_array(numbers))
 
         elif choice == "2":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            target = int(input("Enter element to count: "))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+            target = validation.get_integer(
+                "Enter element to count: "
+            )
+
             print("Count:", arrays.count_element(numbers, target))
 
         elif choice == "3":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
             result = arrays.find_maximum(numbers)
 
             if result is None:
@@ -222,17 +236,34 @@ def arrays_menu():
                 print("Maximum:", result)
 
         elif choice == "4":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            print("Array without duplicates:", arrays.remove_duplicates(numbers))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            print(
+                "Array without duplicates:",
+                arrays.remove_duplicates(numbers)
+            )
 
         elif choice == "5":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            pivot = int(input("Enter pivot value: "))
-            print("Partitioned array:", arrays.partition_array(numbers, pivot))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            pivot = validation.get_integer("Enter pivot value: ")
+
+            print(
+                "Partitioned array:",
+                arrays.partition_array(numbers, pivot)
+            )
 
         elif choice == "6":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            k = int(input("Enter k: "))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            k = validation.get_positive_integer("Enter k: ")
+
             result = arrays.kth_smallest(numbers, k)
 
             if result is None:
@@ -262,20 +293,44 @@ def collections_menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            print("List information:", collections.list_operations(numbers))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            print(
+                "List information:",
+                collections.list_operations(numbers)
+            )
 
         elif choice == "2":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            print("Tuple information:", collections.tuple_operations(numbers))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            print(
+                "Tuple information:",
+                collections.tuple_operations(numbers)
+            )
 
         elif choice == "3":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            print("Set information:", collections.set_operations(numbers))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            print(
+                "Set information:",
+                collections.set_operations(numbers)
+            )
 
         elif choice == "4":
-            numbers = list(map(int, input("Enter numbers separated by spaces: ").split()))
-            print("Dictionary frequency:", collections.dictionary_operations(numbers))
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            print(
+                "Dictionary frequency:",
+                collections.dictionary_operations(numbers)
+            )
 
         elif choice == "5":
             break
@@ -301,28 +356,58 @@ def conversions_menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            number = int(input("Enter decimal number: "))
-            print("Binary:", conversions.decimal_to_base(number, 2))
+            number = validation.get_non_negative_integer(
+                "Enter decimal number: "
+            )
+
+            print(
+                "Binary:",
+                conversions.decimal_to_base(number, 2)
+            )
 
         elif choice == "2":
-            number = int(input("Enter decimal number: "))
-            print("Octal:", conversions.decimal_to_base(number, 8))
+            number = validation.get_non_negative_integer(
+                "Enter decimal number: "
+            )
+
+            print(
+                "Octal:",
+                conversions.decimal_to_base(number, 8)
+            )
 
         elif choice == "3":
-            number = int(input("Enter decimal number: "))
-            print("Hexadecimal:", conversions.decimal_to_base(number, 16))
+            number = validation.get_non_negative_integer(
+                "Enter decimal number: "
+            )
+
+            print(
+                "Hexadecimal:",
+                conversions.decimal_to_base(number, 16)
+            )
 
         elif choice == "4":
             number = input("Enter binary number: ")
-            print("Decimal:", conversions.base_to_decimal(number, 2))
+
+            print(
+                "Decimal:",
+                conversions.base_to_decimal(number, 2)
+            )
 
         elif choice == "5":
             number = input("Enter octal number: ")
-            print("Decimal:", conversions.base_to_decimal(number, 8))
+
+            print(
+                "Decimal:",
+                conversions.base_to_decimal(number, 8)
+            )
 
         elif choice == "6":
             number = input("Enter hexadecimal number: ")
-            print("Decimal:", conversions.base_to_decimal(number, 16))
+
+            print(
+                "Decimal:",
+                conversions.base_to_decimal(number, 16)
+            )
 
         elif choice == "7":
             break
@@ -341,6 +426,7 @@ def algorithm_solver_menu():
         print("3. Array Algorithms")
         print("4. Python Collections")
         print("5. Base Conversions")
+        print("6. Back to Main Menu")
         print("========================================")
 
         choice = input("Enter your choice: ")
@@ -357,14 +443,14 @@ def algorithm_solver_menu():
         elif choice == "4":
             collections_menu()
 
-        elif choice == "5": 
+        elif choice == "5":
             conversions_menu()
 
         elif choice == "6":
-            break   
-        
+            break
+
         else:
-            print("Invalid choice. Please enter a number from 1 to 3.")
+            print("Invalid choice. Please enter a number from 1 to 6.")
 
 
 def learning_menu():
@@ -417,7 +503,7 @@ def practice_menu():
             print("\nQuestion:")
             print(question)
 
-            user_answer = int(input("Your answer: "))
+            user_answer = validation.get_integer("Your answer: ")
 
             total_questions += 1
 
@@ -438,6 +524,79 @@ def practice_menu():
             print("Invalid choice. Please enter a number from 1 to 3.")
 
 
+def performance_menu():
+    while True:
+        print("\n========================================")
+        print("          PERFORMANCE ANALYSIS")
+        print("========================================")
+        print("1. Measure Factorial")
+        print("2. Measure Fibonacci")
+        print("3. Measure Prime Generation")
+        print("4. Measure Array Maximum")
+        print("5. Back to Main Menu")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            n = validation.get_non_negative_integer(
+                "Enter a number: "
+            )
+
+            result, execution_time = performance.measure_execution_time(
+                fundamental.factorial,
+                n
+            )
+
+            print("Result:", result)
+            print("Execution time:", execution_time, "seconds")
+
+        elif choice == "2":
+            n = validation.get_non_negative_integer(
+                "Enter number of Fibonacci terms: "
+            )
+
+            result, execution_time = performance.measure_execution_time(
+                fundamental.fibonacci_sequence,
+                n
+            )
+
+            print("Result:", result)
+            print("Execution time:", execution_time, "seconds")
+
+        elif choice == "3":
+            n = validation.get_non_negative_integer(
+                "Generate primes up to: "
+            )
+
+            result, execution_time = performance.measure_execution_time(
+                factoring.generate_primes,
+                n
+            )
+
+            print("Prime numbers:", result)
+            print("Execution time:", execution_time, "seconds")
+
+        elif choice == "4":
+            numbers = validation.get_integer_list(
+                "Enter numbers separated by spaces: "
+            )
+
+            result, execution_time = performance.measure_execution_time(
+                arrays.find_maximum,
+                numbers
+            )
+
+            print("Maximum:", result)
+            print("Execution time:", execution_time, "seconds")
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 5.")
+
+
 def main():
     while True:
         show_menu()
@@ -446,7 +605,7 @@ def main():
 
         if choice == "1":
             algorithm_solver_menu()
-            
+
         elif choice == "2":
             learning_menu()
 
@@ -454,8 +613,7 @@ def main():
             practice_menu()
 
         elif choice == "4":
-            print("\n[Performance Analysis]")
-            print("This module will be added soon.")
+            performance_menu()
 
         elif choice == "5":
             print("\n[History]")
