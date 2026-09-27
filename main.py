@@ -7,6 +7,9 @@ from Learning import explanations
 from Practice import questions
 from Utilities import validation
 from Utilities import performance
+from Utilities import history
+from Utilities import file_manager
+
 
 def show_menu():
     print("\n============================================")
@@ -21,6 +24,10 @@ def show_menu():
     print("6. Help")
     print("7. Exit")
     print("============================================")
+
+
+def save_operation(operation, details):
+    history.add_history(operation, details)
 
 
 def fundamental_menu():
@@ -47,11 +54,21 @@ def fundamental_menu():
             result = fundamental.exchange_values(a, b)
             print("After exchange:", result)
 
+            save_operation(
+                "Exchange Values",
+                f"a={a}, b={b}, result={result}"
+            )
+
         elif choice == "2":
             n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.count_numbers(n)
             print("Count:", result)
+
+            save_operation(
+                "Counting",
+                f"n={n}, result={result}"
+            )
 
         elif choice == "3":
             n = validation.get_non_negative_integer("Enter a number: ")
@@ -59,11 +76,21 @@ def fundamental_menu():
             result = fundamental.summation(n)
             print("Sum:", result)
 
+            save_operation(
+                "Summation",
+                f"n={n}, result={result}"
+            )
+
         elif choice == "4":
             n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.factorial(n)
             print("Factorial:", result)
+
+            save_operation(
+                "Factorial",
+                f"n={n}, result={result}"
+            )
 
         elif choice == "5":
             n = validation.get_non_negative_integer(
@@ -73,17 +100,32 @@ def fundamental_menu():
             result = fundamental.fibonacci_sequence(n)
             print("Fibonacci sequence:", result)
 
+            save_operation(
+                "Fibonacci Sequence",
+                f"n={n}, result={result}"
+            )
+
         elif choice == "6":
             n = validation.get_non_negative_integer("Enter a number: ")
 
             result = fundamental.reverse_number(n)
             print("Reversed number:", result)
 
+            save_operation(
+                "Reverse Number",
+                f"n={n}, result={result}"
+            )
+
         elif choice == "7":
             character = input("Enter a digit character: ")
 
             result = fundamental.character_to_number(character)
             print("Number:", result)
+
+            save_operation(
+                "Character to Number",
+                f"character={character}, result={result}"
+            )
 
         elif choice == "8":
             break
@@ -120,6 +162,11 @@ def factoring_menu():
             else:
                 print("Square root:", result)
 
+                save_operation(
+                    "Square Root",
+                    f"n={n}, result={result}"
+                )
+
         elif choice == "2":
             n = validation.get_integer("Enter an integer: ")
 
@@ -130,12 +177,22 @@ def factoring_menu():
             else:
                 print("Smallest divisor:", result)
 
+                save_operation(
+                    "Smallest Divisor",
+                    f"n={n}, result={result}"
+                )
+
         elif choice == "3":
             a = validation.get_integer("Enter first number: ")
             b = validation.get_integer("Enter second number: ")
 
             result = factoring.gcd(a, b)
             print("GCD:", result)
+
+            save_operation(
+                "GCD",
+                f"a={a}, b={b}, result={result}"
+            )
 
         elif choice == "4":
             n = validation.get_non_negative_integer(
@@ -145,6 +202,11 @@ def factoring_menu():
             result = factoring.generate_primes(n)
             print("Prime numbers:", result)
 
+            save_operation(
+                "Generate Primes",
+                f"limit={n}, result={result}"
+            )
+
         elif choice == "5":
             n = validation.get_positive_integer("Enter a number: ")
 
@@ -152,6 +214,11 @@ def factoring_menu():
 
             if result:
                 print("Prime factors:", result)
+
+                save_operation(
+                    "Prime Factors",
+                    f"n={n}, result={result}"
+                )
             else:
                 print("Please enter an integer greater than 1.")
 
@@ -165,6 +232,11 @@ def factoring_menu():
                 result = factoring.pseudo_random_number(start, end)
                 print("Pseudo-random number:", result)
 
+                save_operation(
+                    "Pseudo-Random Number",
+                    f"range={start} to {end}, result={result}"
+                )
+
         elif choice == "7":
             base = validation.get_integer("Enter base: ")
             exponent = validation.get_non_negative_integer(
@@ -173,6 +245,11 @@ def factoring_menu():
 
             result = factoring.large_power(base, exponent)
             print("Result:", result)
+
+            save_operation(
+                "Large Power",
+                f"base={base}, exponent={exponent}, result={result}"
+            )
 
         elif choice == "8":
             n = validation.get_non_negative_integer("Enter n: ")
@@ -183,6 +260,11 @@ def factoring_menu():
                 print("Please enter a non-negative number.")
             else:
                 print(f"The {n}th Fibonacci number is:", result)
+
+                save_operation(
+                    "Nth Fibonacci",
+                    f"n={n}, result={result}"
+                )
 
         elif choice == "9":
             break
@@ -211,17 +293,31 @@ def arrays_menu():
             numbers = validation.get_integer_list(
                 "Enter numbers separated by spaces: "
             )
-            print("Reversed array:", arrays.reverse_array(numbers))
+
+            result = arrays.reverse_array(numbers)
+            print("Reversed array:", result)
+
+            save_operation(
+                "Reverse Array",
+                f"array={numbers}, result={result}"
+            )
 
         elif choice == "2":
             numbers = validation.get_integer_list(
                 "Enter numbers separated by spaces: "
             )
+
             target = validation.get_integer(
                 "Enter element to count: "
             )
 
-            print("Count:", arrays.count_element(numbers, target))
+            result = arrays.count_element(numbers, target)
+            print("Count:", result)
+
+            save_operation(
+                "Count Element",
+                f"array={numbers}, target={target}, result={result}"
+            )
 
         elif choice == "3":
             numbers = validation.get_integer_list(
@@ -235,14 +331,23 @@ def arrays_menu():
             else:
                 print("Maximum:", result)
 
+                save_operation(
+                    "Find Maximum",
+                    f"array={numbers}, result={result}"
+                )
+
         elif choice == "4":
             numbers = validation.get_integer_list(
                 "Enter numbers separated by spaces: "
             )
 
-            print(
-                "Array without duplicates:",
-                arrays.remove_duplicates(numbers)
+            result = arrays.remove_duplicates(numbers)
+
+            print("Array without duplicates:", result)
+
+            save_operation(
+                "Remove Duplicates",
+                f"array={numbers}, result={result}"
             )
 
         elif choice == "5":
@@ -252,9 +357,13 @@ def arrays_menu():
 
             pivot = validation.get_integer("Enter pivot value: ")
 
-            print(
-                "Partitioned array:",
-                arrays.partition_array(numbers, pivot)
+            result = arrays.partition_array(numbers, pivot)
+
+            print("Partitioned array:", result)
+
+            save_operation(
+                "Partition Array",
+                f"array={numbers}, pivot={pivot}, result={result}"
             )
 
         elif choice == "6":
@@ -270,6 +379,11 @@ def arrays_menu():
                 print("Invalid value of k.")
             else:
                 print(f"{k}th smallest element:", result)
+
+                save_operation(
+                    "Kth Smallest",
+                    f"array={numbers}, k={k}, result={result}"
+                )
 
         elif choice == "7":
             break
@@ -297,9 +411,12 @@ def collections_menu():
                 "Enter numbers separated by spaces: "
             )
 
-            print(
-                "List information:",
-                collections.list_operations(numbers)
+            result = collections.list_operations(numbers)
+            print("List information:", result)
+
+            save_operation(
+                "List Operations",
+                f"input={numbers}, result={result}"
             )
 
         elif choice == "2":
@@ -307,9 +424,12 @@ def collections_menu():
                 "Enter numbers separated by spaces: "
             )
 
-            print(
-                "Tuple information:",
-                collections.tuple_operations(numbers)
+            result = collections.tuple_operations(numbers)
+            print("Tuple information:", result)
+
+            save_operation(
+                "Tuple Operations",
+                f"input={numbers}, result={result}"
             )
 
         elif choice == "3":
@@ -317,9 +437,12 @@ def collections_menu():
                 "Enter numbers separated by spaces: "
             )
 
-            print(
-                "Set information:",
-                collections.set_operations(numbers)
+            result = collections.set_operations(numbers)
+            print("Set information:", result)
+
+            save_operation(
+                "Set Operations",
+                f"input={numbers}, result={result}"
             )
 
         elif choice == "4":
@@ -327,9 +450,12 @@ def collections_menu():
                 "Enter numbers separated by spaces: "
             )
 
-            print(
-                "Dictionary frequency:",
-                collections.dictionary_operations(numbers)
+            result = collections.dictionary_operations(numbers)
+            print("Dictionary frequency:", result)
+
+            save_operation(
+                "Dictionary Operations",
+                f"input={numbers}, result={result}"
             )
 
         elif choice == "5":
@@ -360,9 +486,12 @@ def conversions_menu():
                 "Enter decimal number: "
             )
 
-            print(
-                "Binary:",
-                conversions.decimal_to_base(number, 2)
+            result = conversions.decimal_to_base(number, 2)
+            print("Binary:", result)
+
+            save_operation(
+                "Decimal to Binary",
+                f"number={number}, result={result}"
             )
 
         elif choice == "2":
@@ -370,9 +499,12 @@ def conversions_menu():
                 "Enter decimal number: "
             )
 
-            print(
-                "Octal:",
-                conversions.decimal_to_base(number, 8)
+            result = conversions.decimal_to_base(number, 8)
+            print("Octal:", result)
+
+            save_operation(
+                "Decimal to Octal",
+                f"number={number}, result={result}"
             )
 
         elif choice == "3":
@@ -380,34 +512,58 @@ def conversions_menu():
                 "Enter decimal number: "
             )
 
-            print(
-                "Hexadecimal:",
-                conversions.decimal_to_base(number, 16)
+            result = conversions.decimal_to_base(number, 16)
+            print("Hexadecimal:", result)
+
+            save_operation(
+                "Decimal to Hexadecimal",
+                f"number={number}, result={result}"
             )
 
         elif choice == "4":
             number = input("Enter binary number: ")
 
-            print(
-                "Decimal:",
-                conversions.base_to_decimal(number, 2)
-            )
+            try:
+                result = conversions.base_to_decimal(number, 2)
+                print("Decimal:", result)
+
+                save_operation(
+                    "Binary to Decimal",
+                    f"number={number}, result={result}"
+                )
+
+            except ValueError:
+                print("Invalid binary number.")
 
         elif choice == "5":
             number = input("Enter octal number: ")
 
-            print(
-                "Decimal:",
-                conversions.base_to_decimal(number, 8)
-            )
+            try:
+                result = conversions.base_to_decimal(number, 8)
+                print("Decimal:", result)
+
+                save_operation(
+                    "Octal to Decimal",
+                    f"number={number}, result={result}"
+                )
+
+            except ValueError:
+                print("Invalid octal number.")
 
         elif choice == "6":
             number = input("Enter hexadecimal number: ")
 
-            print(
-                "Decimal:",
-                conversions.base_to_decimal(number, 16)
-            )
+            try:
+                result = conversions.base_to_decimal(number, 16)
+                print("Decimal:", result)
+
+                save_operation(
+                    "Hexadecimal to Decimal",
+                    f"number={number}, result={result}"
+                )
+
+            except ValueError:
+                print("Invalid hexadecimal number.")
 
         elif choice == "7":
             break
@@ -597,6 +753,58 @@ def performance_menu():
             print("Invalid choice. Please enter a number from 1 to 5.")
 
 
+def history_menu():
+    while True:
+        print("\n========================================")
+        print("                HISTORY")
+        print("========================================")
+        print("1. View History")
+        print("2. Save History")
+        print("3. Load History")
+        print("4. Clear History")
+        print("5. Back to Main Menu")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            records = history.get_history()
+
+            if records:
+                print("\n--- History ---")
+
+                for record in records:
+                    print(record)
+            else:
+                print("\nNo history available.")
+
+        elif choice == "2":
+            records = history.get_history()
+
+            file_manager.save_history(records)
+
+            print("History saved successfully.")
+
+        elif choice == "3":
+            records = file_manager.load_history()
+
+            history.set_history()
+
+            print("History loaded successfully.")
+
+            
+
+        elif choice == "4":
+            history.clear_history()
+            print("History cleared.")
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 5.")
+
+
 def main():
     while True:
         show_menu()
@@ -616,12 +824,21 @@ def main():
             performance_menu()
 
         elif choice == "5":
-            print("\n[History]")
-            print("This module will be added soon.")
+            history_menu()
 
         elif choice == "6":
-            print("\n[Help]")
-            print("ALGO-X is an interactive algorithm learning toolkit.")
+            print("\n========================================")
+            print("                    HELP")
+            print("========================================")
+            print("ALGO-X is an interactive algorithm")
+            print("learning and problem-solving toolkit.")
+            print()
+            print("Use Algorithm Solver to execute algorithms.")
+            print("Use Learning Module to study algorithms.")
+            print("Use Practice Mode to test your knowledge.")
+            print("Use Performance Analysis to measure execution time.")
+            print("Use History to view and save previous operations.")
+            print("========================================")
 
         elif choice == "7":
             print("\nThank you for using ALGO-X!")
