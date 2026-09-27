@@ -2,6 +2,7 @@ from Algorithms import fundamental
 from Algorithms import factoring
 from Algorithms import arrays
 from Algorithms import collections
+from Algorithms import conversions
 
 
 def show_menu():
@@ -281,6 +282,52 @@ def collections_menu():
             print("Invalid choice. Please enter a number from 1 to 5.")
 
 
+def conversions_menu():
+    while True:
+        print("\n========================================")
+        print("             BASE CONVERSION")
+        print("========================================")
+        print("1. Decimal to Binary")
+        print("2. Decimal to Octal")
+        print("3. Decimal to Hexadecimal")
+        print("4. Binary to Decimal")
+        print("5. Octal to Decimal")
+        print("6. Hexadecimal to Decimal")
+        print("7. Back to Algorithm Solver")
+        print("========================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            number = int(input("Enter decimal number: "))
+            print("Binary:", conversions.decimal_to_base(number, 2))
+
+        elif choice == "2":
+            number = int(input("Enter decimal number: "))
+            print("Octal:", conversions.decimal_to_base(number, 8))
+
+        elif choice == "3":
+            number = int(input("Enter decimal number: "))
+            print("Hexadecimal:", conversions.decimal_to_base(number, 16))
+
+        elif choice == "4":
+            number = input("Enter binary number: ")
+            print("Decimal:", conversions.base_to_decimal(number, 2))
+
+        elif choice == "5":
+            number = input("Enter octal number: ")
+            print("Decimal:", conversions.base_to_decimal(number, 8))
+
+        elif choice == "6":
+            number = input("Enter hexadecimal number: ")
+            print("Decimal:", conversions.base_to_decimal(number, 16))
+
+        elif choice == "7":
+            break
+
+        else:
+            print("Invalid choice. Please enter a number from 1 to 7.")
+
 
 def algorithm_solver_menu():
     while True:
@@ -291,6 +338,7 @@ def algorithm_solver_menu():
         print("2. Factoring Algorithms")
         print("3. Array Algorithms")
         print("4. Python Collections")
+        print("5. Base Conversions")
         print("========================================")
 
         choice = input("Enter your choice: ")
@@ -308,7 +356,10 @@ def algorithm_solver_menu():
             collections_menu()
 
         elif choice == "5": 
-            break
+            conversions_menu()
+
+        elif choice == "6":
+            break   
         
         else:
             print("Invalid choice. Please enter a number from 1 to 3.")
